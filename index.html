@@ -1,20 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>话费统计</title>
-<style>
-:root {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   话费统计
+  </title>
+  <style>
+   :root {
   --blue:#2563eb;
+  --blue2:#60a5fa;
   --ink:#10264d;
   --muted:#647b9b;
   --line:#d9e6f7;
+  --bg:#f3f8ff;
   --green:#07845d;
   --purple:#7c3aed;
 }
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
 body {
   margin:0;
   background:linear-gradient(135deg,#f2f8ff,#f8fbff);
@@ -30,7 +35,7 @@ header {
   display:flex;
   align-items:center;
   gap:13px;
-  margin-bottom:16px;
+  margin:0 0 16px;
 }
 .logo {
   width:52px;
@@ -39,12 +44,19 @@ header {
   background:#dcfce7;
   display:grid;
   place-items:center;
-  color:var(--green);
+  color:#07845d;
   font-size:25px;
   font-weight:800;
 }
-h1 { font-size:25px; margin:0 0 4px; }
-header p { margin:0; color:var(--muted); font-size:13px; }
+h1 {
+  font-size:25px;
+  margin:0 0 4px;
+}
+header p {
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
 .panel {
   background:#fff;
   border:1px solid var(--line);
@@ -68,6 +80,7 @@ h2 {
   border-radius:7px;
   background:#e8f1ff;
   color:var(--blue);
+  font-size:14px;
 }
 .upload-zone {
   border:2px dashed #9cc5ff;
@@ -76,9 +89,21 @@ h2 {
   padding:20px;
   text-align:center;
 }
-.upload-icon { font-size:28px; color:var(--blue); margin-bottom:6px; }
-.upload-title { font-size:17px; font-weight:700; margin-bottom:5px; }
-.sub { font-size:13px; color:var(--muted); line-height:1.6; }
+.upload-icon {
+  font-size:28px;
+  color:var(--blue);
+  margin-bottom:6px;
+}
+.upload-title {
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+.sub {
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+}
 #files {
   position:absolute;
   width:1px;
@@ -108,11 +133,29 @@ h2 {
   cursor:pointer;
   transition:.15s;
 }
-.btn:hover { filter:brightness(.97); transform:translateY(-1px); }
-.btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
-.btn.secondary { background:#fff; color:#315277; border-color:#cfe0f7; }
-.btn.soft { background:#eaf2ff; color:#24529a; }
-.file-summary { font-size:13px; color:var(--muted); margin-top:10px; }
+.btn:hover {
+  filter:brightness(.97);
+  transform:translateY(-1px);
+}
+.btn:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+}
+.btn.secondary {
+  background:#fff;
+  color:#315277;
+  border-color:#cfe0f7;
+}
+.btn.soft {
+  background:#eaf2ff;
+  color:#24529a;
+}
+.file-summary {
+  font-size:13px;
+  color:var(--muted);
+  margin-top:10px;
+}
 .file-list-wrap {
   display:flex;
   align-items:center;
@@ -120,8 +163,17 @@ h2 {
   flex-wrap:wrap;
   margin-top:15px;
 }
-.file-list-label { font-size:13px; color:#46617f; font-weight:700; }
-.file-list { display:flex; gap:9px; flex-wrap:wrap; flex:1; }
+.file-list-label {
+  font-size:13px;
+  color:#46617f;
+  font-weight:700;
+}
+.file-list {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  flex:1;
+}
 .file-chip {
   display:flex;
   align-items:center;
@@ -139,13 +191,17 @@ h2 {
   flex:none;
   border-radius:7px;
   background:#dcfce7;
-  color:var(--green);
+  color:#07845d;
   display:grid;
   place-items:center;
   font-weight:800;
   font-size:12px;
 }
-.file-info { min-width:0; flex:1; text-align:left; }
+.file-info {
+  min-width:0;
+  flex:1;
+  text-align:left;
+}
 .file-name {
   font-size:13px;
   font-weight:700;
@@ -153,7 +209,11 @@ h2 {
   overflow:hidden;
   text-overflow:ellipsis;
 }
-.file-size { font-size:11px; color:var(--muted); margin-top:3px; }
+.file-size {
+  font-size:11px;
+  color:var(--muted);
+  margin-top:3px;
+}
 .remove-file {
   border:0;
   background:transparent;
@@ -162,10 +222,20 @@ h2 {
   font-size:18px;
   padding:0 2px;
 }
-.remove-file:hover { color:#dc2626; }
-.status { font-size:13px; color:var(--muted); margin-top:12px; }
-.status.ok { color:var(--green); }
-.status.error { color:#b42318; }
+.remove-file:hover {
+  color:#dc2626;
+}
+.status {
+  font-size:13px;
+  color:var(--muted);
+  margin-top:12px;
+}
+.status.ok {
+  color:var(--green);
+}
+.status.error {
+  color:#b42318;
+}
 .metrics {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -205,9 +275,17 @@ h2 {
   overflow-wrap:anywhere;
   font-variant-numeric:tabular-nums;
 }
-.total .metric-value { color:var(--green); }
-.purple .metric-value { color:#6d28d9; }
-.copy-btn { padding:6px 10px; font-size:12px; margin-top:9px; }
+.total .metric-value {
+  color:var(--green);
+}
+.purple .metric-value {
+  color:#6d28d9;
+}
+.copy-btn {
+  padding:6px 10px;
+  font-size:12px;
+  margin-top:9px;
+}
 .table-wrap {
   width:100%;
   overflow:auto;
@@ -232,20 +310,31 @@ th,td {
   text-align:left;
   white-space:nowrap;
 }
-tbody tr:last-child td { border-bottom:0; }
-tbody tr:hover { background:#f8fbff; }
+tbody tr:last-child td {
+  border-bottom:0;
+}
+tbody tr:hover {
+  background:#f8fbff;
+}
 td.num,th.num {
   text-align:right;
   font-variant-numeric:tabular-nums;
 }
-td.strong { font-weight:800; color:#142c50; }
-.file-cell { display:flex; align-items:center; gap:8px; }
+td.strong {
+  font-weight:800;
+  color:#142c50;
+}
+.file-cell {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 .small-excel {
   width:23px;
   height:23px;
   border-radius:5px;
   background:#dcfce7;
-  color:var(--green);
+  color:#07845d;
   display:grid;
   place-items:center;
   font-size:10px;
@@ -260,7 +349,12 @@ td.strong { font-weight:800; color:#142c50; }
   font-size:11px;
   font-weight:700;
 }
-.hint { font-size:12px; color:var(--muted); margin:10px 0 0; line-height:1.6; }
+.hint {
+  font-size:12px;
+  color:var(--muted);
+  margin:10px 0 0;
+  line-height:1.6;
+}
 .daily-head {
   display:flex;
   align-items:center;
@@ -268,646 +362,379 @@ td.strong { font-weight:800; color:#142c50; }
   gap:10px;
   flex-wrap:wrap;
 }
-.empty { text-align:center; color:#91a3ba; padding:24px!important; }
-@media(max-width:700px) {
-  main { margin:14px auto; padding:0 10px 20px; }
-  .panel { padding:13px; }
-  .metrics { grid-template-columns:1fr; }
-  .metric-value { font-size:27px; }
-  .upload-zone { padding:16px 10px; }
-  h1 { font-size:22px; }
-  .file-chip { max-width:100%; width:100%; }
-  .file-list { width:100%; }
+.empty {
+  text-align:center;
+  color:#91a3ba;
+  padding:24px!important;
 }
-</style>
-</head>
-<body>
-<main>
-  <header>
-    <div class="logo">X</div>
+@media(max-width:700px) {
+  main{margin:14px auto;
+  padding:0 10px 20px}.panel{padding:13px}.metrics{grid-template-columns:1fr}.metric-value{font-size:27px}.upload-zone{padding:16px 10px}h1{font-size:22px}.file-chip{max-width:100%;
+  width:100%}.file-list{width:100%};
+}
+  </style>
+ </head>
+ <body>
+  <main>
+   <header>
+    <div class="logo">
+     X
+    </div>
     <div>
-      <h1>话费统计</h1>
-      <p>支持多文件 · 自动识别金额 · 排除“呼入”业务</p>
+     <h1>
+      话费统计
+     </h1>
+     <p>
+      支持多文件 · 自动识别金额 · 排除“呼入”业务
+     </p>
     </div>
-  </header>
+   </header>
 
-  <section class="panel">
+   <section class="panel">
     <div class="upload-zone">
-      <div class="upload-icon">☁</div>
-      <div class="upload-title">选择要分析的 Excel 文件</div>
-      <div class="sub">支持 .xlsx / .xls / .xlsm，自动识别“网关名称”和“话费总计”列</div>
-      <input id="files" type="file" accept=".xlsx,.xls,.xlsm" multiple>
-      <div class="actions">
-        <button class="btn" id="chooseBtn">↥ 选择文件</button>
-        <button class="btn" id="analyzeBtn">✓ 开始统计</button>
-        <button class="btn secondary" id="clearBtn">清空</button>
-        <button class="btn secondary" id="exportBtn" disabled>▤ 导出统计结果 CSV</button>
-      </div>
-      <div id="fileSummary" class="file-summary">尚未选择文件 · 一次最多 8 个文件</div>
+     <div class="upload-icon">
+      ☁
+     </div>
+     <div class="upload-title">
+      选择要分析的 Excel 文件
+     </div>
+     <div class="sub">
+      支持 .xlsx / .xls / .xlsm，自动识别“网关名称”和“话费总计”列
+     </div>
+     <input accept=".xlsx,.xls,.xlsm" id="files" multiple="" type="file"/>
+     <div class="actions">
+      <button class="btn" id="chooseBtn">
+       ↥ 选择文件
+      </button>
+      <button class="btn" id="analyzeBtn">
+       ✓ 开始统计
+      </button>
+      <button class="btn secondary" id="clearBtn">
+       清空
+      </button>
+      <button class="btn secondary" disabled="" id="exportBtn">
+       ▤ 导出统计结果 CSV
+      </button>
+     </div>
+     <div class="file-summary" id="fileSummary">
+      尚未选择文件 · 一次最多 8 个文件
+     </div>
     </div>
-
     <div class="file-list-wrap">
-      <div class="file-list-label">已上传文件</div>
-      <div id="fileList" class="file-list">
-        <span class="sub">选择文件后显示在这里</span>
-      </div>
-      <button class="btn secondary" id="removeAllBtn" style="padding:8px 11px;font-size:12px">全部清空</button>
+     <div class="file-list-label">
+      已上传文件
+     </div>
+     <div class="file-list" id="fileList">
+      <span class="sub">
+       选择文件后显示在这里
+      </span>
+     </div>
+     <button class="btn secondary" id="removeAllBtn" style="padding:8px 11px;font-size:12px">
+      全部清空
+     </button>
     </div>
-    <div id="status" class="status">请选择 Excel 文件开始统计。</div>
-  </section>
+    <div class="status" id="status">
+     请选择 Excel 文件开始统计。
+    </div>
+   </section>
 
-  <section class="panel">
-    <h2><span class="section-icon">▤</span>汇总结果</h2>
+   <section class="panel">
+    <h2>
+     <span class="section-icon">
+      ▤
+     </span>
+     汇总结果
+    </h2>
     <div class="metrics">
-      <div class="metric total">
-        <div class="metric-label">排除“呼入”后的话费总计</div>
-        <div class="metric-value" id="grandTotal">—</div>
-        <button class="btn soft copy-btn" id="copyTotalBtn" disabled>▢ 复制金额</button>
+     <div class="metric total">
+      <div class="metric-label">
+       排除“呼入”后的话费总计
       </div>
-      <div class="metric blue">
-        <div class="metric-label">已分析文件数</div>
-        <div class="metric-value" id="fileCount">0</div>
+      <div class="metric-value" id="grandTotal">
+       —
       </div>
-      <div class="metric purple">
-        <div class="metric-label">纳入统计的记录数</div>
-        <div class="metric-value" id="includedCount">0</div>
+      <button class="btn soft copy-btn" disabled="" id="copyTotalBtn">
+       ▢ 复制金额
+      </button>
+     </div>
+     <div class="metric blue">
+      <div class="metric-label">
+       已分析文件数
       </div>
+      <div class="metric-value" id="fileCount">
+       0
+      </div>
+     </div>
+     <div class="metric purple">
+      <div class="metric-label">
+       纳入统计的记录数
+      </div>
+      <div class="metric-value" id="includedCount">
+       0
+      </div>
+     </div>
     </div>
-  </section>
+   </section>
 
-  <section class="panel">
-    <h2><span class="section-icon">▦</span>每个文件统计</h2>
+   <section class="panel">
+    <h2>
+     <span class="section-icon">
+      ▦
+     </span>
+     每个文件统计
+    </h2>
     <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>文件名</th>
-            <th class="num">排除前话费合计</th>
-            <th class="num">排除呼入金额</th>
-            <th class="num">最终话费</th>
-            <th class="num">纳入条数</th>
-            <th class="num">排除条数</th>
-            <th>状态</th>
-          </tr>
-        </thead>
-        <tbody id="fileResults">
-          <tr><td colspan="7" class="empty">分析文件后显示结果</td></tr>
-        </tbody>
-      </table>
+     <table>
+      <thead>
+       <tr>
+        <th>
+         文件名
+        </th>
+        <th class="num">
+         排除前话费合计
+        </th>
+        <th class="num">
+         排除呼入金额
+        </th>
+        <th class="num">
+         最终话费
+        </th>
+        <th class="num">
+         纳入条数
+        </th>
+        <th class="num">
+         排除条数
+        </th>
+        <th>
+         状态
+        </th>
+       </tr>
+      </thead>
+      <tbody id="fileResults">
+       <tr>
+        <td class="empty" colspan="7">
+         分析文件后显示结果
+        </td>
+       </tr>
+      </tbody>
+     </table>
     </div>
-    <p class="hint">金额按原始数值精度累加，显示 3 位小数。</p>
-  </section>
+    <p class="hint">
+     金额按原始数值精度累加，显示 3 位小数。
+    </p>
+   </section>
 
-  <section class="panel">
+   <section class="panel">
     <div class="daily-head">
-      <h2 style="margin-bottom:14px"><span class="section-icon">▦</span>每日消费明细</h2>
-      <button class="btn secondary" id="exportDailyBtn" disabled style="padding:7px 11px;font-size:12px">▤ 导出每日明细</button>
+     <h2 style="margin-bottom:14px">
+      <span class="section-icon">
+       ▦
+      </span>
+      每日消费明细
+     </h2>
+     <button class="btn secondary" disabled="" id="exportDailyBtn" style="padding:7px 11px;font-size:12px">
+      ▤ 导出每日明细
+     </button>
     </div>
     <div class="table-wrap">
-      <table style="min-width:450px">
-        <thead>
-          <tr>
-            <th>日期</th>
-            <th class="num">消费金额</th>
-            <th class="num">纳入条数</th>
-          </tr>
-        </thead>
-        <tbody id="dailyResults">
-          <tr><td colspan="3" class="empty">分析文件后显示每日消费</td></tr>
-        </tbody>
-      </table>
+     <table style="min-width:450px">
+      <thead>
+       <tr>
+        <th>
+         日期
+        </th>
+        <th class="num">
+         消费金额
+        </th>
+        <th class="num">
+         纳入条数
+        </th>
+       </tr>
+      </thead>
+      <tbody id="dailyResults">
+       <tr>
+        <td class="empty" colspan="3">
+         分析文件后显示每日消费
+        </td>
+       </tr>
+      </tbody>
+     </table>
     </div>
-    <p class="hint">按日期汇总所有文件中未被排除的记录。需要 Excel 中存在日期或时间列。</p>
-  </section>
-</main>
+    <p class="hint">
+     按日期汇总所有文件中未被排除的记录。需在 Excel 中存在“起始时间”“日期”或类似日期列。
+    </p>
+   </section>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script>
-const $ = id => document.getElementById(id);
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js">
+  </script>
 
+  <script>
+   const $ = id => document.getElementById(id);
 let selectedFiles = [];
 let lastFileRows = [];
 let lastDailyRows = [];
-
-const fmt = n => (Number(n)||0).toLocaleString("zh-CN", {
-  minimumFractionDigits:3,
-  maximumFractionDigits:3
-});
-
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
-}[c]));
-
-function norm(v) {
-  return String(v ?? "").replace(/\s+/g,"").replace(/[：:]/g,"").trim();
-}
-
-// 识别表头及日期列
-function findHeader(data) {
-  const dateHeaderNames = [
-    "起始时间","开始时间","通话时间","呼叫时间",
-    "接通时间","结束时间","创建时间","发生时间",
-    "计费时间","日期","时间","starttime",
-    "start_time","start date","calltime","call_time",
-    "datetime","date"
-  ];
-
-  for (let r = 0; r < Math.min(data.length,40); r++) {
-    const row = (data[r] || []).map(norm);
-
-    const gateway = row.findIndex(v => v.includes("网关名称"));
-    const amount = row.findIndex(v => v.includes("话费总计"));
-
-    if (gateway < 0 || amount < 0) continue;
-
-    let date = -1;
-
-    // 优先根据列名识别日期
-    for (let i = 0; i < row.length; i++) {
-      const h = row[i].toLowerCase();
-
-      if (i !== gateway && i !== amount &&
-          dateHeaderNames.some(n => h === n.toLowerCase() || h.includes(n.toLowerCase()))) {
-        date = i;
-        break;
-      }
+const fmt = n => (Number(n)||0).toLocaleString('zh-CN',{minimumFractionDigits:3,maximumFractionDigits:3});
+const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function norm(v){return String(v ?? '').replace(/\s+/g,'').replace(/[：:]/g,'').trim();}
+function findHeader(data){
+  const dateNames=['起始时间','开始时间','通话时间','呼叫时间','日期','时间','starttime','start time','date','datetime','call time'];
+  for(let r=0;r<Math.min(data.length,40);r++){
+    const row=(data[r]||[]).map(norm);
+    const gateway=row.findIndex(v=>v.includes('网关名称'));
+    const amount=row.findIndex(v=>v.includes('话费总计'));
+    if(gateway<0 || amount<0) continue;
+    let date=-1;
+    for(let i=0;i<row.length;i++){
+      const h=row[i].toLowerCase();
+      if(dateNames.some(n=>h===n.toLowerCase() || h.includes(n.toLowerCase()))){date=i;break;}
     }
-
-    // 列名不标准时，检查数据内容判断日期列
-    if (date < 0) {
-      let bestIndex = -1;
-      let bestScore = 0;
-
-      for (let c = 0; c < row.length; c++) {
-        if (c === gateway || c === amount) continue;
-
-        let score = 0;
-
-        for (let rr = r + 1; rr < Math.min(data.length,r + 16); rr++) {
-          const value = (data[rr] || [])[c];
-
-          if (value instanceof Date && !isNaN(value)) {
-            score++;
-          } else if (typeof value === "number" && value > 20000 && value < 80000) {
-            score++;
-          } else if (
-            typeof value === "string" &&
-            /(20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2})/.test(value)
-          ) {
-            score++;
-          }
-        }
-
-        if (score > bestScore) {
-          bestScore = score;
-          bestIndex = c;
-        }
-      }
-
-      if (bestScore >= 2) date = bestIndex;
-    }
-
-    return { row:r, gateway, amount, date };
+    return {row:r,gateway,amount,date};
   }
-
   return null;
 }
-
-// 金额转换
-function parseAmount(v) {
-  if (v === null || v === undefined || String(v).trim() === "") {
-    return {value:0,empty:true,valid:true};
-  }
-
-  if (typeof v === "number" && Number.isFinite(v)) {
-    return {value:v,empty:false,valid:true};
-  }
-
-  const n = Number(String(v).replace(/[￥¥,\s]/g,"").trim());
-
-  return Number.isFinite(n)
-    ? {value:n,empty:false,valid:true}
-    : {value:0,empty:false,valid:false};
+function parseAmount(v){
+  if(v===null || v===undefined || String(v).trim()==='')return {value:0,empty:true,valid:true};
+  if(typeof v==='number' && Number.isFinite(v))return {value:v,empty:false,valid:true};
+  const n=Number(String(v).replace(/[￥¥,\s]/g,'').trim());
+  return Number.isFinite(n)?{value:n,empty:false,valid:true}:{value:0,empty:false,valid:false};
 }
-
-// 日期统一转换为 YYYY-MM-DD
-function normalizeDate(v) {
-  if (v === null || v === undefined || String(v).trim() === "") {
-    return "";
+function normalizeDate(v){
+  if(v===null || v===undefined || String(v).trim()==='')return '';
+  if(v instanceof Date && !isNaN(v))return `${v.getFullYear()}-${String(v.getMonth()+1).padStart(2,'0')}-${String(v.getDate()).padStart(2,'0')}`;
+  if(typeof v==='number' && v>20000 && v<80000){
+    const d=XLSX.SSF.parse_date_code(v);
+    if(d)return `${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`;
   }
-
-  if (v instanceof Date && !isNaN(v)) {
-    return `${v.getFullYear()}-${String(v.getMonth()+1).padStart(2,"0")}-${String(v.getDate()).padStart(2,"0")}`;
-  }
-
-  // Excel 日期序列号
-  if (typeof v === "number" && v > 20000 && v < 80000) {
-    const d = XLSX.SSF.parse_date_code(v);
-
-    if (d) {
-      return `${d.y}-${String(d.m).padStart(2,"0")}-${String(d.d).padStart(2,"0")}`;
-    }
-  }
-
-  const text = String(v).trim();
-  const m = text.match(/(20\d{2})[-/.年](\d{1,2})[-/.月](\d{1,2})/);
-
-  if (m) {
-    return `${m[1]}-${String(m[2]).padStart(2,"0")}-${String(m[3]).padStart(2,"0")}`;
-  }
-
-  return "";
+  const text=String(v).trim();
+  const m=text.match(/(20\d{2})[-/.年](\d{1,2})[-/.月](\d{1,2})/);
+  if(m)return `${m[1]}-${String(m[2]).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;
+  return '';
 }
-
-// 显示已选文件
-function renderSelectedFiles() {
-  $("fileSummary").textContent = selectedFiles.length
-    ? `已选择 ${selectedFiles.length} 个文件 · 最多 8 个文件`
-    : "尚未选择文件 · 一次最多 8 个文件";
-
-  $("fileList").innerHTML = selectedFiles.length
-    ? selectedFiles.map((f,i) => `
-      <div class="file-chip">
-        <div class="excel-icon">X</div>
-        <div class="file-info">
-          <div class="file-name" title="${esc(f.name)}">${esc(f.name)}</div>
-          <div class="file-size">${(f.size/1024/1024).toFixed(2)} MB</div>
-        </div>
-        <button class="remove-file" data-remove="${i}" title="移除文件">×</button>
-      </div>
-    `).join("")
-    : '<span class="sub">选择文件后显示在这里</span>';
-
-  document.querySelectorAll("[data-remove]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      selectedFiles.splice(Number(btn.dataset.remove),1);
-      renderSelectedFiles();
-    });
-  });
+function renderSelectedFiles(){
+  $('fileSummary').textContent=selectedFiles.length ? `已选择 ${selectedFiles.length} 个文件 · 最多 8 个文件` : '尚未选择文件 · 一次最多 8 个文件';
+  $('fileList').innerHTML=selectedFiles.length ? selectedFiles.map((f,i)=>`
+    <div class="file-chip">
+      <div class="excel-icon">X</div>
+      <div class="file-info"><div class="file-name" title="${esc(f.name)}">${esc(f.name)}</div><div class="file-size">${(f.size/1024/1024).toFixed(2)} MB</div></div>
+      <button class="remove-file" data-remove="${i}" title="移除文件" aria-label="移除文件">×</button>
+    </div>`).join('') : '<span class="sub">选择文件后显示在这里</span>';
+  document.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click',()=>{
+    selectedFiles.splice(Number(btn.dataset.remove),1);renderSelectedFiles();
+  }));
 }
-
-// 分析单个 Excel
-async function analyzeFile(file,dailyMap) {
-  const wb = XLSX.read(await file.arrayBuffer(), {
-    type:"array",
-    cellDates:true
-  });
-
-  let before = 0;
-  let excluded = 0;
-  let final = 0;
-  let includedRows = 0;
-  let excludedRows = 0;
-  let blank = 0;
-  let bad = 0;
-  let sheetsUsed = 0;
-
-  const warnings = [];
-
-  for (const sheetName of wb.SheetNames) {
-    const data = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], {
-      header:1,
-      defval:null,
-      raw:true
-    });
-
-    const h = findHeader(data);
-
-    if (!h) {
-      warnings.push(`“${sheetName}”未找到必需列`);
-      continue;
-    }
-
+async function analyzeFile(file,dailyMap){
+  const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:true});
+  let before=0,excluded=0,final=0,includedRows=0,excludedRows=0,blank=0,bad=0,sheetsUsed=0;
+  const warnings=[];
+  for(const sheetName of wb.SheetNames){
+    const data=XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{header:1,defval:null,raw:true});
+    const h=findHeader(data);
+    if(!h){warnings.push(`“${sheetName}”未找到必需列`);continue;}
     sheetsUsed++;
-
-    for (let r = h.row + 1; r < data.length; r++) {
-      const row = data[r] || [];
-      const gateway = String(row[h.gateway] ?? "").trim();
-      const rawAmount = row[h.amount];
-
-      if (!gateway && (rawAmount === null || rawAmount === undefined ||
-          String(rawAmount).trim() === "")) {
-        continue;
-      }
-
-      const a = parseAmount(rawAmount);
-
-      if (a.empty) blank++;
-      if (!a.valid) {
-        bad++;
-        continue;
-      }
-
-      before += a.value;
-
-      // 排除网关名称包含“呼入”的业务
-      if (gateway.includes("呼入")) {
-        excluded += a.value;
-        excludedRows++;
-        continue;
-      }
-
-      final += a.value;
-      includedRows++;
-
-      // 每日消费汇总
-      if (h.date >= 0) {
-        const date = normalizeDate(row[h.date]);
-
-        if (date) {
-          if (!dailyMap.has(date)) {
-            dailyMap.set(date,{amount:0,count:0});
-          }
-
-          const d = dailyMap.get(date);
-          d.amount += a.value;
-          d.count++;
+    for(let r=h.row+1;r<data.length;r++){
+      const row=data[r]||[];
+      const gateway=String(row[h.gateway]??'').trim();
+      const rawAmount=row[h.amount];
+      if(!gateway && (rawAmount===null || rawAmount===undefined || String(rawAmount).trim()===''))continue;
+      const a=parseAmount(rawAmount);
+      if(a.empty)blank++;
+      if(!a.valid){bad++;continue;}
+      before+=a.value;
+      if(gateway.includes('呼入')){excluded+=a.value;excludedRows++;continue;}
+      final+=a.value;includedRows++;
+      if(h.date>=0){
+        const date=normalizeDate(row[h.date]);
+        if(date){
+          if(!dailyMap.has(date))dailyMap.set(date,{amount:0,count:0});
+          const d=dailyMap.get(date);d.amount+=a.value;d.count++;
         }
       }
     }
   }
-
-  if (!sheetsUsed) {
-    throw new Error("没有找到包含“网关名称”和“话费总计”的工作表");
-  }
-
-  if (blank) warnings.push(`空金额 ${blank} 条按 0 处理`);
-  if (bad) warnings.push(`${bad} 条金额无法识别`);
-
-  return {
-    name:file.name,
-    before,
-    excluded,
-    final,
-    includedRows,
-    excludedRows,
-    sheetsUsed,
-    note:warnings.length
-      ? warnings.join("；")
-      : `已分析 ${sheetsUsed} 个工作表`
-  };
+  if(!sheetsUsed)throw new Error('没有找到包含“网关名称”和“话费总计”的工作表');
+  if(blank)warnings.push(`空金额 ${blank} 条按 0 处理`);
+  if(bad)warnings.push(`${bad} 条金额无法识别`);
+  return {name:file.name,before,excluded,final,includedRows,excludedRows,sheetsUsed,note:warnings.length?warnings.join('；'):`已分析 ${sheetsUsed} 个工作表`};
 }
-
-// 渲染统计结果
-function renderResults(fileRows,dailyRows) {
-  lastFileRows = fileRows;
-  lastDailyRows = dailyRows;
-
-  const total = fileRows.reduce((sum,r) => sum + (r.final || 0),0);
-
-  $("grandTotal").textContent = fmt(total);
-  $("fileCount").textContent = fileRows.filter(r => !r.error).length;
-  $("includedCount").textContent = fileRows
-    .reduce((sum,r) => sum + (r.includedRows || 0),0)
-    .toLocaleString("zh-CN");
-
-  $("copyTotalBtn").disabled = !fileRows.length;
-  $("exportBtn").disabled = !fileRows.length;
-  $("exportDailyBtn").disabled = !dailyRows.length;
-
-  $("fileResults").innerHTML = fileRows.map(r => r.error
-    ? `<tr>
-        <td>${esc(r.name)}</td>
-        <td colspan="5">—</td>
-        <td style="color:#b42318">${esc(r.error)}</td>
-      </tr>`
-    : `<tr>
-        <td>
-          <div class="file-cell">
-            <span class="small-excel">X</span>
-            ${esc(r.name)}
-          </div>
-        </td>
-        <td class="num">${fmt(r.before)}</td>
-        <td class="num">${fmt(r.excluded)}</td>
-        <td class="num strong">${fmt(r.final)}</td>
-        <td class="num">${r.includedRows}</td>
-        <td class="num">${r.excludedRows}</td>
-        <td><span class="pill">已分析</span> ${esc(r.note)}</td>
-      </tr>`
-  ).join("") || '<tr><td colspan="7" class="empty">分析文件后显示结果</td></tr>';
-
-  $("dailyResults").innerHTML = dailyRows.length
-    ? dailyRows.map(d => `
-      <tr>
-        <td>${esc(d.date)}</td>
-        <td class="num strong">${fmt(d.amount)}</td>
-        <td class="num">${d.count}</td>
-      </tr>
-    `).join("")
-    : '<tr><td colspan="3" class="empty">未识别到日期列，请检查 Excel 日期字段</td></tr>';
+function renderResults(fileRows,dailyRows){
+  lastFileRows=fileRows;lastDailyRows=dailyRows;
+  const total=fileRows.reduce((sum,r)=>sum+r.final,0);
+  $('grandTotal').textContent=fmt(total);
+  $('fileCount').textContent=fileRows.filter(r=>!r.error).length;
+  $('includedCount').textContent=fileRows.reduce((sum,r)=>sum+r.includedRows,0).toLocaleString('zh-CN');
+  $('copyTotalBtn').disabled=!fileRows.length;
+  $('exportBtn').disabled=!fileRows.length;
+  $('exportDailyBtn').disabled=!dailyRows.length;
+  $('fileResults').innerHTML=fileRows.map(r=>r.error
+    ? `<tr><td><div class="file-cell"><span class="small-excel">X</span>${esc(r.name)}</div></td><td colspan="5">—</td><td style="color:#b42318">${esc(r.error)}</td></tr>`
+    : `<tr><td><div class="file-cell"><span class="small-excel">X</span>${esc(r.name)}</div></td><td class="num">${fmt(r.before)}</td><td class="num">${fmt(r.excluded)}</td><td class="num strong">${fmt(r.final)}</td><td class="num">${r.includedRows}</td><td class="num">${r.excludedRows}</td><td><span class="pill">已分析</span> ${esc(r.note)}</td></tr>`
+  ).join('') || '<tr><td colspan="7" class="empty">分析文件后显示结果</td></tr>';
+  $('dailyResults').innerHTML=dailyRows.length?dailyRows.map(d=>`<tr><td>${esc(d.date)}</td><td class="num strong">${fmt(d.amount)}</td><td class="num">${d.count}</td></tr>`).join(''):'<tr><td colspan="3" class="empty">未识别到日期列，请检查 Excel 是否包含日期/时间字段</td></tr>';
 }
-
-// 下载 CSV
-function downloadCsv(rows,name) {
-  const csv = "\uFEFF" + rows.map(row =>
-    row.map(v => '"' + String(v ?? "").replace(/"/g,'""') + '"').join(",")
-  ).join("\r\n");
-
-  const blob = new Blob([csv],{type:"text/csv;charset=utf-8;"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = name;
-  a.click();
-
-  setTimeout(() => URL.revokeObjectURL(url),1000);
+function downloadCsv(rows,name){
+  const csv='\uFEFF'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-
-// 选择文件
-$("chooseBtn").addEventListener("click",() => $("files").click());
-
-$("files").addEventListener("change",() => {
-  const incoming = Array.from($("files").files || []);
-  const combined = [...selectedFiles];
-
-  incoming.forEach(f => {
-    if (!combined.some(old => old.name === f.name && old.size === f.size)) {
-      combined.push(f);
-    }
-  });
-
-  if (combined.length > 8) {
-    $("status").textContent = "一次最多选择 8 个文件，请减少文件数量后再试。";
-    $("status").className = "status error";
-    selectedFiles = combined.slice(0,8);
-  } else {
-    selectedFiles = combined;
-  }
-
-  $("files").value = "";
-  renderSelectedFiles();
+$('chooseBtn').addEventListener('click',()=>$('files').click());
+$('files').addEventListener('change',()=>{
+  const incoming=Array.from($('files').files||[]);
+  const combined=[...selectedFiles];
+  incoming.forEach(f=>{if(!combined.some(old=>old.name===f.name&&old.size===f.size))combined.push(f);});
+  if(combined.length>8){
+    $('status').textContent='一次最多选择 8 个文件，请减少文件数量后再试。';$('status').className='status error';
+    selectedFiles=combined.slice(0,8);
+  }else selectedFiles=combined;
+  $('files').value='';renderSelectedFiles();
 });
-
-// 清空
-$("clearBtn").addEventListener("click",clearAll);
-$("removeAllBtn").addEventListener("click",clearAll);
-
-function clearAll() {
-  selectedFiles = [];
-  lastFileRows = [];
-  lastDailyRows = [];
-
-  renderSelectedFiles();
-
-  $("grandTotal").textContent = "—";
-  $("fileCount").textContent = "0";
-  $("includedCount").textContent = "0";
-
-  $("copyTotalBtn").disabled = true;
-  $("exportBtn").disabled = true;
-  $("exportDailyBtn").disabled = true;
-
-  $("fileResults").innerHTML =
-    '<tr><td colspan="7" class="empty">分析文件后显示结果</td></tr>';
-
-  $("dailyResults").innerHTML =
-    '<tr><td colspan="3" class="empty">分析文件后显示每日消费</td></tr>';
-
-  $("status").textContent = "请选择 Excel 文件开始统计。";
-  $("status").className = "status";
+$('clearBtn').addEventListener('click',clearAll);
+$('removeAllBtn').addEventListener('click',clearAll);
+function clearAll(){
+  selectedFiles=[];lastFileRows=[];lastDailyRows=[];renderSelectedFiles();
+  $('grandTotal').textContent='—';$('fileCount').textContent='0';$('includedCount').textContent='0';
+  $('copyTotalBtn').disabled=true;$('exportBtn').disabled=true;$('exportDailyBtn').disabled=true;
+  $('fileResults').innerHTML='<tr><td colspan="7" class="empty">分析文件后显示结果</td></tr>';
+  $('dailyResults').innerHTML='<tr><td colspan="3" class="empty">分析文件后显示每日消费</td></tr>';
+  $('status').textContent='请选择 Excel 文件开始统计。';$('status').className='status';
 }
-
-// 开始统计
-const analyzeButton = $("analyzeBtn");
-
-analyzeButton.addEventListener("click",async() => {
-  if (!selectedFiles.length) {
-    $("status").textContent = "请先选择 Excel 文件。";
-    $("status").className = "status error";
-    return;
+const analyzeButton=$('analyzeBtn');
+analyzeButton.addEventListener('click',async()=>{
+  if(!selectedFiles.length){$('status').textContent='请先选择 Excel 文件。';$('status').className='status error';return;}
+  if(typeof XLSX==='undefined'){$('status').textContent='Excel 解析库加载失败，请联网刷新页面。';$('status').className='status error';return;}
+  analyzeButton.disabled=true;$('status').textContent='正在统计，请稍候…';$('status').className='status';
+  const fileRows=[],dailyMap=new Map();
+  for(const f of selectedFiles){
+    try{fileRows.push(await analyzeFile(f,dailyMap));}
+    catch(e){fileRows.push({name:f.name,error:e.message||'分析失败',before:0,excluded:0,final:0,includedRows:0,excludedRows:0});}
   }
-
-  if (typeof XLSX === "undefined") {
-    $("status").textContent = "Excel 解析库加载失败，请联网刷新页面。";
-    $("status").className = "status error";
-    return;
-  }
-
-  analyzeButton.disabled = true;
-  $("status").textContent = "正在统计，请稍候…";
-  $("status").className = "status";
-
-  const fileRows = [];
-  const dailyMap = new Map();
-
-  for (const f of selectedFiles) {
-    try {
-      fileRows.push(await analyzeFile(f,dailyMap));
-    } catch(e) {
-      fileRows.push({
-        name:f.name,
-        error:e.message || "分析失败",
-        before:0,
-        excluded:0,
-        final:0,
-        includedRows:0,
-        excludedRows:0
-      });
-    }
-  }
-
-  const dailyRows = Array.from(dailyMap.entries())
-    .map(([date,v]) => ({
-      date,
-      amount:v.amount,
-      count:v.count
-    }))
-    .sort((a,b) => a.date.localeCompare(b.date));
-
+  const dailyRows=Array.from(dailyMap.entries()).map(([date,v])=>({date,amount:v.amount,count:v.count})).sort((a,b)=>a.date.localeCompare(b.date));
   renderResults(fileRows,dailyRows);
-
-  const errors = fileRows.filter(r => r.error).length;
-
-  $("status").textContent =
-    `统计完成：${fileRows.length} 个文件` +
-    (errors ? `，${errors} 个文件需要检查` : "，请核对统计结果") + "。";
-
-  $("status").className = "status " + (errors ? "error" : "ok");
-  analyzeButton.disabled = false;
+  const errors=fileRows.filter(r=>r.error).length;
+  $('status').textContent=`统计完成：${fileRows.length} 个文件${errors?`，${errors} 个文件需要检查`:'，请核对统计结果'}。`;
+  $('status').className='status '+(errors?'error':'ok');
+  analyzeButton.disabled=false;
 });
-
-// 复制最终话费
-$("copyTotalBtn").addEventListener("click",async() => {
-  const amount = $("grandTotal").textContent.trim();
-
-  if (!amount || amount === "—") return;
-
-  try {
-    await navigator.clipboard.writeText(amount);
-  } catch(e) {
-    const ta = document.createElement("textarea");
-    ta.value = amount;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
+$('copyTotalBtn').addEventListener('click',async()=>{
+  const amount=$('grandTotal').textContent.trim();if(!amount||amount==='—')return;
+  try{await navigator.clipboard.writeText(amount);}catch(e){
+    const ta=document.createElement('textarea');ta.value=amount;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
   }
-
-  $("copyTotalBtn").textContent = "✓ 已复制";
-
-  setTimeout(() => {
-    $("copyTotalBtn").textContent = "▢ 复制金额";
-  },1200);
+  $('copyTotalBtn').textContent='✓ 已复制';setTimeout(()=>$('copyTotalBtn').textContent='▢ 复制金额',1200);
 });
-
-// 导出完整统计
-$("exportBtn").addEventListener("click",() => {
-  const rows = [[
-    "文件名","排除前话费合计","排除呼入金额",
-    "最终话费","纳入条数","排除条数","状态"
-  ]];
-
-  lastFileRows.forEach(r => rows.push([
-    r.name,
-    (r.before || 0).toFixed(3),
-    (r.excluded || 0).toFixed(3),
-    (r.final || 0).toFixed(3),
-    r.includedRows || 0,
-    r.excludedRows || 0,
-    r.error || r.note || "已分析"
-  ]));
-
-  rows.push([]);
-  rows.push(["每日消费明细"]);
-  rows.push(["日期","消费金额","纳入条数"]);
-
-  lastDailyRows.forEach(d => rows.push([
-    d.date,
-    d.amount.toFixed(3),
-    d.count
-  ]));
-
-  rows.push([]);
-  rows.push([
-    "总计","","",
-    lastFileRows.reduce((s,r) => s + (r.final || 0),0).toFixed(3),
-    lastFileRows.reduce((s,r) => s + (r.includedRows || 0),0),
-    lastFileRows.reduce((s,r) => s + (r.excludedRows || 0),0),
-    ""
-  ]);
-
-  downloadCsv(rows,"话费统计结果.csv");
+$('exportBtn').addEventListener('click',()=>{
+  const rows=[['文件名','排除前话费合计','排除呼入金额','最终话费','纳入条数','排除条数','状态']];
+  lastFileRows.forEach(r=>rows.push([r.name,r.before.toFixed(3),r.excluded.toFixed(3),r.final.toFixed(3),r.includedRows,r.excludedRows,r.error||r.note||'已分析']));
+  rows.push([]);rows.push(['每日消费明细']);rows.push(['日期','消费金额','纳入条数']);
+  lastDailyRows.forEach(d=>rows.push([d.date,d.amount.toFixed(3),d.count]));
+  rows.push([]);rows.push(['总计','','',lastFileRows.reduce((s,r)=>s+(r.final||0),0).toFixed(3),lastFileRows.reduce((s,r)=>s+(r.includedRows||0),0),lastFileRows.reduce((s,r)=>s+(r.excludedRows||0),0),'']);
+  downloadCsv(rows,'话费统计结果.csv');
 });
-
-// 单独导出每日明细
-$("exportDailyBtn").addEventListener("click",() => {
-  const rows = [
-    ["日期","消费金额","纳入条数"],
-    ...lastDailyRows.map(d => [
-      d.date,
-      d.amount.toFixed(3),
-      d.count
-    ])
-  ];
-
-  downloadCsv(rows,"每日消费明细.csv");
+$('exportDailyBtn').addEventListener('click',()=>{
+  const rows=[['日期','消费金额','纳入条数'],...lastDailyRows.map(d=>[d.date,d.amount.toFixed(3),d.count])];
+  downloadCsv(rows,'每日消费明细.csv');
 });
-</script>
-</body>
+  </script>
+ </body>
 </html>
